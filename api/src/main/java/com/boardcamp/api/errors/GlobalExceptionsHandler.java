@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
   @ExceptionHandler({ BadRequestException.class })
-  public ResponseEntity<String> handleGameBadRequest(BadRequestException exception) {
+  public ResponseEntity<String> handleBadRequest(BadRequestException exception) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
   }
   @ExceptionHandler({ ConflictException.class })
-  public ResponseEntity<String> handleGameConflict(ConflictException exception) {
+  public ResponseEntity<String> handleConflict(ConflictException exception) {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+  }
+  @ExceptionHandler({ NotFoundException.class })
+  public ResponseEntity<String> handleNotFound(NotFoundException exception) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
   }
 }

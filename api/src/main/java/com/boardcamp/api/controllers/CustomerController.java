@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,6 +31,12 @@ public class CustomerController {
 
   public CustomerController(CustomerService customerService) {
       this.customerService = customerService;
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Object> getCustomerById(@PathVariable("id") Long id) {
+      CustomerModel customer = customerService.findById(id);
+      return ResponseEntity.status(HttpStatus.OK).body(customer);
   }
 
   @PostMapping
