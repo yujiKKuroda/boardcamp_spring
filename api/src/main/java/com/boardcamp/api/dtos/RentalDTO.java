@@ -10,6 +10,12 @@ import lombok.Data;
 
 @Data
 public class RentalDTO {
+    @NotNull
+    private Long customerId;
+
+    @NotNull
+    private Long gameId;
+
     @NotBlank
     private LocalDate rentDate;
 

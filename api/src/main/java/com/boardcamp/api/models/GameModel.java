@@ -23,7 +23,7 @@ public class GameModel {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
 	@Column(nullable = false)
@@ -41,5 +41,4 @@ public class GameModel {
       this.stockTotal = dto.getStockTotal();
       this.pricePerDay = dto.getPricePerDay();
   }
-
 }

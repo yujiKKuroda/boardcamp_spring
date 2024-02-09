@@ -27,7 +27,7 @@ public class CustomerModel {
   @Column(nullable = false)
   private String name;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
   @Size(min = 11, max = 11)
   private String cpf;
 
