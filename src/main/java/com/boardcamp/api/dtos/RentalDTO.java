@@ -3,7 +3,6 @@ package com.boardcamp.api.dtos;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -16,7 +15,6 @@ public class RentalDTO {
     @NotNull
     private Long gameId;
 
-    @NotBlank
     private LocalDate rentDate;
 
     @Min(value = 1, message = "Days rented must be greater than 0")

@@ -48,12 +48,12 @@ public class RentalModel {
     private Integer delayFee;
 
     public RentalModel(RentalDTO dto, CustomerModel customer, GameModel game) {
-        this.customer = new CustomerModel(customer.getId(), customer.getName(), customer.getCpf());
-        this.game = new GameModel(game.getId(), game.getName(), game.getImage(), game.getStockTotal(), game.getPricePerDay());
         this.rentDate = LocalDate.now();
         this.daysRented = dto.getDaysRented();
-        this.returnDate = null;
+        this.returnDate = dto.getReturnDate();
         this.originalPrice = dto.getDaysRented() * game.getPricePerDay();
-        this.delayFee = 0;
+        this.delayFee = dto.getDelayFee();
+        this.customer = customer;
+        this.game = game;
     }
 }

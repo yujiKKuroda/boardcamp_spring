@@ -1,11 +1,13 @@
 package com.boardcamp.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.boardcamp.api.dtos.RentalDTO;
 import com.boardcamp.api.errors.NotFoundException;
+import com.boardcamp.api.errors.UnprocessableEntityException;
 import com.boardcamp.api.models.CustomerModel;
 import com.boardcamp.api.models.GameModel;
 import com.boardcamp.api.models.RentalModel;
@@ -33,7 +35,13 @@ public class RentalService {
 
     GameModel game = gameRepository.findById(dto.getGameId()).orElseThrow(
       () -> new NotFoundException("Game not found!")
-    );  
+    );
+
+    List<RentalModel> rentalList = rentalRepository.findByGameId(game.getId());
+
+    if (rentalList.size() >= game.getStockTotal()) {
+      throw new UnprocessableEntityException("There're no more games available!");
+    }
     
     RentalModel rental = new RentalModel(dto, customer, game);
     return Optional.of(rentalRepository.save(rental));
