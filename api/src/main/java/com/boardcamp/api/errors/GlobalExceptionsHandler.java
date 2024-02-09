@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionsHandler {
-  @ExceptionHandler({ GameBadRequestException.class })
-  public ResponseEntity<String> handleGameBadRequest(GameBadRequestException exception) {
+  @ExceptionHandler({ BadRequestException.class })
+  public ResponseEntity<String> handleGameBadRequest(BadRequestException exception) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
   }
-  @ExceptionHandler({ GameConflictException.class })
-  public ResponseEntity<String> handleGameConflict(GameConflictException exception) {
+  @ExceptionHandler({ ConflictException.class })
+  public ResponseEntity<String> handleGameConflict(ConflictException exception) {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
   }
 }

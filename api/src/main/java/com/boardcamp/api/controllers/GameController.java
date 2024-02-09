@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boardcamp.api.dtos.GameDTO;
-import com.boardcamp.api.errors.GameBadRequestException;
+import com.boardcamp.api.errors.BadRequestException;
 import com.boardcamp.api.models.GameModel;
 import com.boardcamp.api.services.GameService;
 
@@ -40,7 +40,7 @@ public class GameController {
     @PostMapping
     public ResponseEntity<Object> createGame(@Validated @RequestBody @Valid GameDTO body, BindingResult result) {
         if (result.hasErrors()) {
-            throw new GameBadRequestException("Invalid values!");
+            throw new BadRequestException("Invalid values!");
         }
 
         Optional<GameModel> game = gameService.save(body);
