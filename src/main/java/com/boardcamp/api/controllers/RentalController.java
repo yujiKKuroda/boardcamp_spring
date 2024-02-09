@@ -32,7 +32,7 @@ public class RentalController {
   }
 
   @PostMapping
-  public ResponseEntity<Object> createCustomer(@Validated @RequestBody @Valid RentalDTO body, BindingResult result) {
+  public ResponseEntity<Object> createRental(@Validated @RequestBody @Valid RentalDTO body, BindingResult result) {
       if (result.hasErrors()) {
           throw new BadRequestException("Invalid values!");
       }
