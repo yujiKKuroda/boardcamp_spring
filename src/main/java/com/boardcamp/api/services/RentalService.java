@@ -41,7 +41,7 @@ public class RentalService {
       () -> new NotFoundException("Game not found!")
     );
 
-    List<RentalModel> rentalList = rentalRepository.findByGameId(game.getId());
+    List<RentalModel> rentalList = rentalRepository.findCompletedRentalsByGameId(game.getId());
 
     if (rentalList.size() >= game.getStockTotal()) {
       throw new UnprocessableEntityException("There're no more games available!");
