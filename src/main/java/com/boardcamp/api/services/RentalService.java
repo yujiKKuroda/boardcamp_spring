@@ -43,7 +43,7 @@ public class RentalService {
       rental.setDelayFee(game.getPricePerDay() * daysToCalculateFee);
     }
     return rentalRepository.save(rental);
-}
+  }
 
   public List<RentalModel> findAll() {
     return rentalRepository.findAll();
