@@ -27,6 +27,10 @@ public class RentalService {
     this.rentalRepository = rentalRepository;
   }
 
+  public List<RentalModel> findAll() {
+    return rentalRepository.findAll();
+  }
+
   public Optional<RentalModel> save(RentalDTO dto) {
     
     CustomerModel customer = customerRepository.findById(dto.getCustomerId()).orElseThrow(

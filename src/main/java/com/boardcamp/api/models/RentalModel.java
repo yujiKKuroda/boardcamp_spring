@@ -3,6 +3,7 @@ package com.boardcamp.api.models;
 import java.time.LocalDate;
 
 import com.boardcamp.api.dtos.RentalDTO;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "rentals")
+@JsonPropertyOrder({"id", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee", "customer", "game"})
 public class RentalModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
