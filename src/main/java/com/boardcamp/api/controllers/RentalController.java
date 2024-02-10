@@ -18,7 +18,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "*")
@@ -45,5 +47,11 @@ public class RentalController {
 
         Optional<RentalModel> rental = rentalService.save(body);
         return ResponseEntity.status(HttpStatus.CREATED).body(rental);
+    }
+
+    @PutMapping("/{id}/return")
+    public ResponseEntity<Object> returnRental(@PathVariable Long id) {
+        RentalModel rental = rentalService.update(id);
+        return ResponseEntity.status(HttpStatus.OK).body(rental);
     }
 }

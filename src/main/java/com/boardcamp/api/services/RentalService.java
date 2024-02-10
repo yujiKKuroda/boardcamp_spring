@@ -1,5 +1,7 @@
 package com.boardcamp.api.services;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,22 @@ public class RentalService {
     this.gameRepository = gameRepository;
     this.rentalRepository = rentalRepository;
   }
+
+  public RentalModel update(Long id) {
+    RentalModel rental = rentalRepository.findById(id).orElseThrow(
+      () -> new NotFoundException("Rental not found!")
+    );
+    if (rental.getReturnDate() != null){
+      throw new UnprocessableEntityException("Game already returned!");
+    }
+    rental.setReturnDate(LocalDate.now());
+    Integer daysToCalculateFee = (int) (Math.abs(ChronoUnit.DAYS.between(rental.getRentDate(), rental.getReturnDate())) - rental.getDaysRented());
+    if (daysToCalculateFee > 0) {
+      GameModel game = rental.getGame();
+      rental.setDelayFee(game.getPricePerDay() * daysToCalculateFee);
+    }
+    return rentalRepository.save(rental);
+}
 
   public List<RentalModel> findAll() {
     return rentalRepository.findAll();
